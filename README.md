@@ -1,2 +1,2 @@
 # textospeech
-javascript web audio api
+transcrire un texte en audio fait avec javascript web audio api, encore une fois merci au mdn qui m'a servie de guide...
