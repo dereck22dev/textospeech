@@ -13,7 +13,9 @@ Textospeech est une application qui permet de transcrire un texte en audio.
 
 ## Comment participer ?
 
-
+1. Cloner le project
+2. Faire un pull Request
+3. Selon la pertinence de vos modifications, nous validerons le pull et vous serez intégré dans la liste des top contributeurs.
 
 ## Remerciements
 
