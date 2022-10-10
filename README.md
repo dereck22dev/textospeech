@@ -2,7 +2,7 @@
 
 Textospeech est une application qui permet de transcrire un texte en audio.
 
-##Technologie utilisée
+## Technologie utilisée
 
 => javascript web audio api
 
