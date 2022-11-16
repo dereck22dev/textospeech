@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <!--Author: Dahou Amour *** github:http://github.com/Amour22***all Reserved copyright 2022 -->
 <html lang="fr">
+
 <head>
+    <!--meta-->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--title-->
     <title>textToSpeech</title>
+    <!--style links-->
     <link rel="stylesheet" href="textTspeech.css">
 </head>
+
 <body>
-    <div id="container">
+    <!--header-->
+    <header>
         <h1>TextToSpeech</h1>
-        <div id="view">
-            <div id="animcontainer" >
+    </header>
+    <!-- main -->
+    <main class="container">
+        <!-- screen -->
+        <div class="screen">
+            <div class="animcontainer">
                 <span class="anim">.</span>
                 <span class="anim">.</span>
                 <span class="anim">.</span>
@@ -21,25 +31,31 @@
                 <span class="anim">.</span>
             </div>
         </div>
-        <form id="formBx">
+        <!-- form -->
+        <form class="formContainer">
+            <!-- input area -->
             <textarea name="texte" id="text" placeholder="Entrer le texte ici puis cliquez sur lire..."></textarea>
-            <div id="commande">
+            <!-- buttons panel -->
+            <div class="controls">
                 <div>
-                    <label for="voice">voix </label>
-                    <select name="voice" id="voice"> </select>
+                    <label for="voices">voix </label>
+                    <select name="voices" id="voices"> </select>
                     <label for="volume">volume </label>
                     <input type="range" name="volume" id="volume" min="0.5" max="2" value="1" step="0.1">
                 </div>
                 <div>
                     <label for="pitch">velosité </label>
                     <input type="range" name="pitch" id="pitch" min="0" max="2" value="1" step="0.1">
-                    <label for="vitesse">vitesse </label>
-                    <input type="range" name="vitesse" id="vitesse" min="0.5" max="2" value="1" step="0.1">
+                    <label for="speed">vitesse </label>
+                    <input type="range" name="speed" id="speed" min="0.5" max="2" value="1" step="0.1">
                 </div>
             </div>
-            <input type="submit" id="lire" value="LIRE">
+            <!-- listen button -->
+            <input type="submit" id="listen" value="&#127911;">
         </form>
-</div>
-<script src="textTspeech.js"></script>
+    </main>
+    <!-- script import -->
+    <script src="textTspeech.js"></script>
 </body>
+
 </html>

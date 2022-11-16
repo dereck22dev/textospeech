@@ -1,69 +1,83 @@
+/**VARIABLE DECLARATION */
+let formContainer = document.querySelector('form');
+let textInput = document.querySelector('#text');
+let voiceInput = document.querySelector('select');
+let volumeInput = document.querySelector('#volume');
+let pitchInput = document.querySelector('#pitch');
+let speedInput = document.querySelector('#speed');
+let availableVoices = [];
 
-    let formBx=document.querySelector('form');
-    let text=document.querySelector('#text');
-    let voicedispo=[];
-    let Fvoice=document.querySelector('select');
-    let Fvolume=document.querySelector('#volume');
-    let Fpitch=document.querySelector('#pitch');
-    let Fvitesse=document.querySelector('#vitesse');
-    
-    let synt=window.speechSynthesis;
-    
-    function voiceConfig() {
-        voicedispo=synt.getVoices().sort(
-            function(a,b) {
-                const valA=a.name.toUpperCase(), valB=b.name.toUpperCase();
-                if (valA<valB) return -1;
-                else if (valA==valB) return 0;
-                else return +1
-            }
-        );
-        let choix=Fvoice.selectedIndex < 0 ? 0:Fvoice.selectedIndex;
-        Fvoice.innerHTML='';
-       for (let i=0; i < voicedispo.length; i++) {
-            let option=document.createElement('option');
+/**speechSynthesis instanciation */
+let synthesis = window.speechSynthesis;
 
-            option.textContent=voicedispo[i].name + ' (' + voicedispo[i].lang + ')';
-            option.setAttribute('data-lang',voicedispo[i].lang);
-            option.setAttribute('data-name',voicedispo[i].name);
+/**
+ * voiceConfig: allow to get available language and sort it then config a interface voice input
+ */
+function voiceConfig() {
+    availableVoices = synthesis.getVoices().sort(
+        function (prev, next) {
+            const preval = prev.name.toUpperCase(), nextval = next.name.toUpperCase();
+            if (preval < nextval) return -1;
+            else if (preval == nextval) return 0;
+            else return +1
+        }
+    );
 
-            Fvoice.appendChild(option);
-        };
-        Fvoice.choix=choix;
-    }voiceConfig();
+    let choice = voiceInput.selectedIndex < 0 ? 0 : voiceInput.selectedIndex;
 
-    if (speechSynthesis.onvoiceschanged !==undefined) {
-        speechSynthesis.onvoiceschanged=voiceConfig;
-    }
+    voiceInput.innerHTML = '';
 
-    formBx.onsubmit=function(e){
-        e.preventDefault();
-        talk();
-        text.blur();
-    }
-    function talk() {
-        console.log(text.value);
-        if (text.value !== '') {
-            let utterance=new SpeechSynthesisUtterance(text.value);
+    for (let i = 0; i < availableVoices.length; i++) {
+        let option = document.createElement('option');
 
-            utterance.volume=Fvolume.value;
-            utterance.pitch=Fpitch.value
-            utterance.rate=Fvitesse.value;
+        option.textContent = availableVoices[i].name + ' (' + availableVoices[i].lang + ')';
+        option.setAttribute('data-lang', availableVoices[i].lang);
+        option.setAttribute('data-name', availableVoices[i].name);
 
-            let choix=Fvoice.selectedOptions[0].getAttribute('data-name');
-            for (let i = 0; i < voicedispo.length; i++) {
-                if (voicedispo[i].name===choix) {
-                   utterance.voice=voicedispo[i];
-                   break;
-                }
-            }
-            synt.speak(utterance);
+        voiceInput.appendChild(option);
+    };
+    voiceInput.choice = choice;
+} voiceConfig();
 
-            document.querySelector('#animcontainer').style='display:flex !important';
-            
-            utterance.onend=()=>{
-                document.querySelector('#animcontainer').style='display:none !important';
+if (speechSynthesis.onvoiceschanged !== undefined) {
+    speechSynthesis.onvoiceschanged = voiceConfig;
+}
+
+formContainer.onsubmit = e => {
+    e.preventDefault();
+    talk();
+    text.blur();
+}
+
+/**
+ * talk: allow when user click on listen button to listen text input values
+ */
+function talk() {
+
+    if (text.value) {
+        let utterance = new SpeechSynthesisUtterance(text.value);
+
+        utterance.volume = volumeInput.value;
+        utterance.pitch = pitchInput.value
+        utterance.rate = speedInput.value;
+
+        let choice = voiceInput.selectedOptions[0].getAttribute('data-name');
+
+        for (let i = 0; i < availableVoices.length; i++) {
+            if (availableVoices[i].name === choice) {
+                utterance.voice = availableVoices[i];
+                break;
             }
         }
+
+        synthesis.speak(utterance);
+
+        document.querySelector('.animcontainer').style = 'display:flex !important';
+        utterance.onend = () => {
+            document.querySelector('.animcontainer').style = 'display:none !important';
+        }
     }
-    Fvoice.onchange=()=>{talk();}
+}
+
+/**start listen if text input values change */
+voiceInput.onchange = () => talk();

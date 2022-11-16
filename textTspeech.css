@@ -1,134 +1,192 @@
-*{
+/*********************     ROOT.   *************************/
+
+:root {
+    --clr-dark: #111;
+    --clr-default: white;
+    --clr-light: azure;
+    --clr-accent: goldenrod;
+}
+
+/********************   INITIALIZE.   *************************/
+* {
     padding: 0;
     margin: 0;
-    outline: none;
     box-sizing: border-box;
-    font-family: cursive;
+    outline: none;
+    font-family: sans-serif;
+    cursor: pointer;
+    user-select: none;
 }
-body{
-    width: auto;
-    height: 100vh;
+
+/*********************    BODY.  *************************/
+body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    background-color: rgb(0, 0, 0);
-    overflow: hidden;
-}
-#container{
-    width: 100%;
     height: 100vh;
+    background-color: var(--clr-dark);
+    overflow-x: hidden;
+}
+
+/*********************    HEADER.  *************************/
+header {
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 0px 70px;
+    border-bottom: 1px solid var(--clr-accent);
+}
+
+
+h1 {
+    color: var(--clr-accent);
+    margin: 20px 0px;
+}
+
+/*********************    MAIN.  *************************/
+
+main.container {
+    height: 100%;
+    width: 100%;
+    margin: 0 auto;
     padding: 50px;
     display: flex;
     flex-direction: column;
-    background-color: black;
+    background-color: var(--clr-dark);
 }
-h1{
-    color: goldenrod;
-    margin: 20px 0px;
-}
-#view{
-    width: 100%;
-    height: 100px;
-    min-height: 100px;
+
+main .screen {
+    min-height: 120px;
     padding: 20px;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    border: 2px solid goldenrod;
+    border: 2px solid var(--clr-accent);
 }
-#formBx{
+
+form.formContainer {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-#text{
+
+textarea#text {
     width: 100%;
-    height: 130px;
+    min-height: 230px;
     padding: 10px;
     margin: 20px;
     text-align: left;
     word-break: break-word;
-    background-color: azure;
-    border: 1px solid goldenrod;
-    font-family: sans-serif;
+    background-color: var(--clr-light);
+    border: 1px solid var(--clr-accent);
     font-size: 1em;
     line-height: 1.6em;
     resize: none;
+    user-select: text;
+    cursor: text;
 }
-#commande{
+
+textarea#text::selection {
+    color: var(--clr-default);
+    background-color: var(--clr-accent);
+}
+
+form .controls {
     margin: 20px 0px;
 }
-#commande div{
+
+.controls div {
     margin: 20px 0px;
     display: flex;
     justify-content: space-between;
 }
-label{
-    color: white;
-    margin:0px 10px;
+
+label {
+    color: var(--clr-default);
+    margin: 0px 10px;
 }
-#voice,
+
+#voices,
 #pitch,
 #range,
-#vitesse,
-#volume{
+#speed,
+#volume {
     width: 100px;
 }
-#lire{
+
+input#listen {
     width: 50px !important;
     height: 50px !important;
-    font-weight: 700;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 20px;
     letter-spacing: 1.5px;
-    background-color:goldenrod;
+    background-color: var(--clr-light);
     border: none;
     border-radius: 50%;
 }
-#animcontainer{
-   display: none;
-   justify-content: center;
-   align-content: center;
-   width: 100%;
-   height:100%;
+
+.animcontainer {
+    display: none;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    height: 100%;
 }
 
-span{position: relative;
+span.anim {
+    position: relative;
     font-size: 200px;
-    font-weight: 1000;
     line-height: 80px;
     overflow: hidden;
-    color: rgb(0, 0, 0);
-    background-color: rgb(231, 194, 27);
-    text-shadow: 1px 1px 1px rgb(17, 16, 16),
-                1px 2px 1px rgb(8, 7, 7),
-                1px 3px 1px rgb(12, 10, 10),
-                1px 4px 1px rgb(19, 18, 18),
-                1px 5px 1px rgb(12, 12, 12)
-                ;
-    animation: load 3s infinite;               
+    background-color: var(--clr-accent);
+    animation: load 3s infinite;
+}
+
+@keyframes load {
+
+    0%,
+    100% {}
+
+    20% {
+        opacity: 1;
     }
 
-@keyframes load{
-        0%,100%{}
-        20%{opacity: 1;}
-        50%{text-shadow: 0px 0px 0px;}
-        99.99%{opacity: 0;}
+    50% {
+        text-shadow: 0px 0px 0px;
     }
 
-span:nth-child(1){animation-delay:0s;}
-span:nth-child(2){animation-delay:0.258s ;}
-span:nth-child(3){animation-delay:0.420s;}
-span:nth-child(4){animation-delay:0.800s ;}
-span:nth-child(5){animation-delay:1.14s;}
-span:nth-child(6){animation-delay:1.42s ;}
+    99.99% {
+        opacity: 0;
+    }
+}
+
+span.anim:nth-child(1) {
+    animation-delay: 0s;
+}
+
+span.anim:nth-child(2) {
+    animation-delay: 0.258s;
+}
+
+span.anim:nth-child(3) {
+    animation-delay: 0.420s;
+}
+
+span.anim:nth-child(4) {
+    animation-delay: 0.800s;
+}
+
+span.anim:nth-child(5) {
+    animation-delay: 1.14s;
+}
+
+span.anim:nth-child(6) {
+    animation-delay: 1.42s;
+}
 @media (min-width:999px) {
-    #container{
+    main.container {
         max-width: 500px;
-        border: 5px solid goldenrod;
+        border: 5px solid var(--clr-accent);
     }
 }
